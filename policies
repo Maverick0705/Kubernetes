@@ -1,0 +1,47 @@
+// Creating Policy
+
+//vim load-balancer-role-trust-policy.json      ---  Change the oidc id
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::143450199021:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/65C900454A6F038ED7974DC468C8D58B"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "oidc.eks.us-east-1.amazonaws.com/id/65C900454A6F038ED7974DC468C8D58B:aud": "sts.amazonaws.com",
+                    "oidc.eks.us-east-1.amazonaws.com/id/65C900454A6F038ED7974DC468C8D58B:sub": "system:serviceaccount:kube-system:aws-load-balancer-controller"
+                }
+            }
+        }
+    ]
+}
+
+
+// To create policy
+
+aws iam create-role \
+
+  --role-name AmazonEKSLoadBalancerControllerRole \
+
+  --assume-role-policy-document file://"load-balancer-role-trust-policy.json"
+
+// To attach policy
+
+aws iam attach-role-policy \
+
+  --policy-arn arn:aws:iam::143450199021:policy/AWSLoadBalancerControllerIAMPolicy \
+
+  --role-name AmazonEKSLoadBalancerControllerRole
+
+
+  
+
+
+
+  
