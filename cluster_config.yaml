@@ -1,0 +1,59 @@
+---
+
+
+
+apiVersion: eksctl.io/v1alpha5
+
+kind: ClusterConfig
+
+metadata:
+
+  name: My-cluster
+
+  region: us-east-1
+
+  version: "1.26"
+
+vpc:
+
+  id: <vpc-id>
+
+  subnets:
+
+    private:
+
+      us-east-1a:
+
+        id: <subnet-id>
+
+      us-east-1b:
+
+        id: <subnet-id>
+
+      us-east-1c:
+
+        id: <subnet-id>
+
+    public:
+
+      us-east-1a:
+
+        id: <subnet-id>
+
+      us-east-1b:
+
+        id: <subnet-id>
+
+      us-east-1c:
+
+        id: <subnet-id>
+
+managedNodeGroups:
+
+- name: general
+
+  privateNetworking: true
+
+  instanceType: t2.small
+
+  desiredCapacity: 1
