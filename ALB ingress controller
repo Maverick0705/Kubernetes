@@ -1,0 +1,7 @@
+https://helm.sh/docs/intro/install/
+
+https://artifacthub.io/packages/helm/aws/aws-load-balancer-controller
+
+kubectl get deployment -n kube-system aws-load-balancer-controller
+
+
